@@ -73,3 +73,23 @@ uploaded_file = st.file_uploader(
     type=["csv"]
 )
 
+# ==========================================
+# Model selection dropdown (if multiple models)
+# ==========================================
+
+st.header("Model Selection")
+
+model_options_dropdown = st.selectbox("Select a Model", list(models.keys()))
+selected_model = models[model_options_dropdown]
+st.text("Selected Model is : " + model_options_dropdown)
+# Train Selected Model
+if model_options_dropdown in ["Logistic Regression", "KNN"]:
+    selected_model.fit(X_train_scaled, y_train)
+    y_pred_test = selected_model.predict(X_test_scaled)
+    y_prob_test = selected_model.predict_proba(X_test_scaled)[:, 1]
+else:
+    selected_model.fit(X_train, y_train)
+    y_pred_test = selected_model.predict(X_test)
+    y_prob_test = selected_model.predict_proba(X_test)[:, 1]
+
+
