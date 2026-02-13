@@ -92,4 +92,12 @@ else:
     y_pred_test = selected_model.predict(X_test)
     y_prob_test = selected_model.predict_proba(X_test)[:, 1]
 
+# ==========================================
+# Uploaded Dataset Evaluation (First)
+# ==========================================
 
+if uploaded_file is not None:
+    st.markdown("---")
+    st.header("Evaluation on Uploaded Dataset")
+else:
+    st.text("No data")
