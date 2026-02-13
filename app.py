@@ -47,3 +47,29 @@ print(len(data.data))
 st.text("Record Count : " + str(record_count))
 st.text("Target Count : " + str(target_count))
 st.text("Feature Count : " + str(feature_count))
+
+# ==========================================
+# Define Models
+# ==========================================
+
+models = {
+    "Logistic Regression": LogisticRegression(max_iter=1000),
+    "Decision Tree": DecisionTreeClassifier(),
+    "KNN": KNeighborsClassifier(),
+    "Naive Bayes": GaussianNB(),
+    "Random Forest": RandomForestClassifier(),
+    "XGBoost": XGBClassifier(
+        use_label_encoder=False,
+        eval_metric="logloss",
+        random_state=42
+    )
+}
+# ==========================================
+# Dataset upload option (CSV)
+# ==========================================
+st.header("Dataset Upload Option")
+uploaded_file = st.file_uploader(
+    "Upload Test CSV File (Must contain 'target' column)",
+    type=["csv"]
+)
+
