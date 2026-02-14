@@ -98,6 +98,7 @@ The Streamlit web application includes:
 The app dynamically trains and evaluates models based on user selection.
 
 **Project Structure**
+
 ML_Assignment_2/
 │
 ├── app.py                      # Streamlit web application
@@ -107,6 +108,7 @@ ML_Assignment_2/
 │
 ├── requirements.txt            # Required Python libraries
 └── README.md                   # Project documentation
+
 
 **How to Run the Project**
 Run through Streamlit App URL (Mentioned below):
