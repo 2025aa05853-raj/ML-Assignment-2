@@ -137,14 +137,14 @@ The app dynamically trains and evaluates models based on user selection.
 
 ```bash
 ML_Assignment_2/
-│
-├── app.py                      # Streamlit web application
 ├── model/
 │   ├── train_models.py         # Model training & evaluation script
 │   └── model_results.csv       # Saved model performance results
-│
-├── requirements.txt            # Required Python libraries
 └── README.md                   # Project documentation
+├── app.py                      # Streamlit web application
+|── breast_cancer_dataset.csv   # Training dataset downloaded from UCI Portal. This is not used as code is downloading the data directly at runtime
+├── requirements.txt            # Required Python libraries
+|── sample_test_data.csv        # sample test data to download and validate from Streamlit portal
 ```
 
 
