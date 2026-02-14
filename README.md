@@ -5,11 +5,17 @@ This project implements and compares multiple Machine Learning classification mo
 The objective is to evaluate how different algorithms perform on the same dataset using standard performance metrics and present the results through an interactive Streamlit web application.
 
 The project demonstrates a complete end-to-end ML workflow including:
+
 Data preprocessing
+
 Model training
+
 Model evaluation
+
 Performance comparison
+
 Web deployment using Streamlit
+
 
 **b. Dataset Description**
 
@@ -18,47 +24,71 @@ Source: UCI Machine Learning Repository
 https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+(Diagnostic)
 
 The dataset was loaded using:
+
 from sklearn.datasets import load_breast_cancer
 
-Dataset Details:
+**Dataset Details:**
+
 569 total instances
+
 30 numerical features
 
 Binary classification problem:
+
 0 → Malignant
+
 1 → Benign
 
 This dataset satisfies assignment requirements:
+
 Minimum 500 instances
+
 Minimum 12 features
 
-Data Preprocessing
+**Data Preprocessing**
 
 The following steps were performed before training:
+
 Dataset loading
+
 Train-test split (80% training, 20% testing)
+
 Feature scaling using StandardScaler (for models requiring scaling)
 
 **c. Models used**
 
-The following six classification models were implemented:
-Logistic Regression
-Decision Tree Classifier
-K-Nearest Neighbors (KNN)
-Gaussian Naive Bayes
-Random Forest (Ensemble – Bagging)
-XGBoost (Ensemble – Boosting)
+**The following six classification models were implemented:**
 
-Evaluation Metrics Used
-Each model was evaluated using the following metrics:
+Logistic Regression
+
+Decision Tree Classifier
+
+K-Nearest Neighbor Classifier
+
+Naive Bayes Classifier - Gaussian
+
+Ensemble Model - Random Forest
+
+Ensemble Model - XGBoost
+
+**Evaluation Metrics Used**
+
+**Each model was evaluated using the following metrics:**
+
 Accuracy
+
 AUC Score
+
 Precision
+
 Recall
+
 F1 Score
+
 Matthews Correlation Coefficient (MCC Score)
 
-Model results are stored in:
+**Model results are stored in:**
+
 model/model_results.csv
 
 **Model Performance Comparison**
@@ -88,17 +118,24 @@ model/model_results.csv
 **Streamlit Application Features**
 
 The Streamlit web application includes:
+
   Dataset upload option (CSV with target column)
+  
   Model selection dropdown
+  
   Evaluation metrics display
+  
   Confusion matrix
+  
   Classification report
+  
   Model performance comparison table
 
 The app dynamically trains and evaluates models based on user selection.
 
 **Project Structure**
 
+```bash
 ML_Assignment_2/
 │
 ├── app.py                      # Streamlit web application
@@ -108,18 +145,26 @@ ML_Assignment_2/
 │
 ├── requirements.txt            # Required Python libraries
 └── README.md                   # Project documentation
+```
 
 
 **How to Run the Project**
-Run through Streamlit App URL (Mentioned below):
+
+Option 1: Run Using Deployed Streamlit App (Recommended)
+
+Access the application directly using the deployed URL:
+
 https://ml-assignment-2-ajffoyej9h3pkimlabefzr.streamlit.app/
 
-Above URL is mentioned in the assignment attached PDF file.
+The above URL is also mentioned in the assignment PDF file.
 
-Alternate option is to install dependency and call the model python file like below:
+Option 2: Run Locally
+
 Step 1: Install Dependencies
+
 pip install -r requirements.txt
 
 Step 2: Generate Model Results
+
 python model/train_models.py
 
