@@ -50,10 +50,10 @@ feature_count = len(data.feature_names)
 models = {
     "Logistic Regression": LogisticRegression(max_iter=1000),
     "Decision Tree": DecisionTreeClassifier(),
-    "KNN": KNeighborsClassifier(),
+    "kNN": KNeighborsClassifier(),
     "Naive Bayes": GaussianNB(),
-    "Random Forest": RandomForestClassifier(),
-    "XGBoost": XGBClassifier(
+    "Random Forest (Ensemble)": RandomForestClassifier(),
+    "XGBoost (Ensemble)": XGBClassifier(
         use_label_encoder=False,
         eval_metric="logloss",
         random_state=42
@@ -153,7 +153,7 @@ col3.metric("MCC Score", round(matthews_corrcoef(y_test, y_pred_test), 4))
 # Confusion Matrix (Model Dataset)
 # ==========================================
 
-st.header("Confusion Matrix and Classification Report (Test Dataset)")
+st.header("Confusion Matrix (Model Dataset)")
 
 st.subheader("Confusion Matrix")
 st.dataframe(pd.DataFrame(confusion_matrix(y_test, y_pred_test)))
@@ -162,10 +162,64 @@ st.dataframe(pd.DataFrame(confusion_matrix(y_test, y_pred_test)))
 # Classification Report (Model Dataset)
 # ==========================================
 
-st.subheader("Classification Report")
+st.subheader("Classification Report (Model Dataset)")
 report_test = classification_report(
     y_test,
     y_pred_test,
     output_dict=True
 )
 st.dataframe(pd.DataFrame(report_test).transpose().round(4))
+
+# ==========================================
+# Model Performance Comparison (All Models Dataset)
+# ==========================================
+
+st.markdown("---")
+st.header("Model Performance Comparison (All Models Dataset)")
+
+comparison_data = []
+
+for name in models.keys():
+
+    model_instance = models[name]
+
+    try:
+        if name in ["Logistic Regression", "KNN"]:
+            model_instance.fit(X_train_scaled, y_train)
+            y_pred = model_instance.predict(X_test_scaled)
+            y_prob = model_instance.predict_proba(X_test_scaled)[:, 1]
+        else:
+            model_instance.fit(X_train, y_train)
+            y_pred = model_instance.predict(X_test)
+            y_prob = model_instance.predict_proba(X_test)[:, 1]
+
+        comparison_data.append([
+            name,
+            accuracy_score(y_test, y_pred),
+            roc_auc_score(y_test, y_prob),
+            precision_score(y_test, y_pred),
+            recall_score(y_test, y_pred),
+            f1_score(y_test, y_pred),
+            matthews_corrcoef(y_test, y_pred)
+        ])
+
+    except Exception as e:
+        st.warning(f"{name} failed: {e}")
+
+# Only display if data exists
+if len(comparison_data) > 0:
+
+    comparison_df = pd.DataFrame(comparison_data, columns=[
+        "ML Model Name",
+        "Accuracy",
+        "AUC",
+        "Precision",
+        "Recall",
+        "F1",
+        "MCC"
+    ])
+
+    st.dataframe(comparison_df.round(4), use_container_width=True)
+
+else:
+    st.error("No models were successfully evaluated.")
