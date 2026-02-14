@@ -93,8 +93,7 @@ else:
 
 if uploaded_file is not None:
     st.markdown("---")
-    st.header("Evaluation on Uploaded Dataset")
-    st.text("Uploaded File Path : " + str(uploaded_file))
+    st.header("Evaluation on Uploaded Dataset")    
     uploaded_data = pd.read_csv(uploaded_file)
     if "target" not in uploaded_data.columns:
         st.error("Uploaded CSV must contain a 'target' column.")
@@ -102,7 +101,7 @@ if uploaded_file is not None:
         st.text("Uploaded CSV has a 'target' column.")
         X_uploadedData = uploaded_data.drop("target", axis=1)
         y_uploadedData = uploaded_data["target"]
-        if model_choice in ["Logistic Regression", "KNN"]:
+        if model_options_dropdown in ["Logistic Regression", "KNN"]:
             X_upload_scaled = scaler.transform(X_uploadedData)
             y_pred_uploadedData = selected_model.predict(X_upload_scaled)
             y_prob_uploadedData = selected_model.predict_proba(X_upload_scaled)[:, 1]
