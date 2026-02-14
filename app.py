@@ -43,11 +43,6 @@ record_count = len(data.data)
 target_count = len(data.target)
 feature_count = len(data.feature_names)
 
-print(len(data.data))
-st.text("Record Count : " + str(record_count))
-st.text("Target Count : " + str(target_count))
-st.text("Feature Count : " + str(feature_count))
-
 # ==========================================
 # Define Models
 # ==========================================
@@ -99,5 +94,6 @@ else:
 if uploaded_file is not None:
     st.markdown("---")
     st.header("Evaluation on Uploaded Dataset")
+    st.text("Uploaded File Path : " + str(uploaded_file))
 else:
     st.text("No data")
