@@ -98,7 +98,7 @@ st.header("Model Selection")
 
 model_options_dropdown = st.selectbox("Select a Model", list(models.keys()))
 selected_model = models[model_options_dropdown]
-st.text("Selected Model is : " + model_options_dropdown)
+#st.text("Selected Model is : " + model_options_dropdown)
 # Train Selected Model
 if model_options_dropdown in ["Logistic Regression", "KNN"]:
     selected_model.fit(X_train_scaled, y_train)
