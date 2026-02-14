@@ -29,3 +29,17 @@ from sklearn.metrics import (
     f1_score,
     matthews_corrcoef
 )
+
+# ==========================================
+# Step 1: Load Dataset
+# ==========================================
+
+data = load_breast_cancer()
+X = data.data
+y = data.target
+
+feature_names = data.feature_names
+
+print("Dataset Shape:", X.shape)
+print("Number of Features:", len(feature_names))
+
