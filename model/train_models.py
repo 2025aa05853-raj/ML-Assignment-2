@@ -76,3 +76,58 @@ models = {
     )
 }
 
+# ==========================================
+# Step 5: Train & Evaluate Models
+# ==========================================
+
+results = []
+
+for name, model in models.items():
+    # Scaling required only for LR and KNN
+    if name in ["Logistic Regression", "KNN"]:
+        model.fit(X_train_scaled, y_train)
+        y_pred = model.predict(X_test_scaled)
+        y_prob = model.predict_proba(X_test_scaled)[:, 1]
+    else:
+        model.fit(X_train, y_train)
+        y_pred = model.predict(X_test)
+        y_prob = model.predict_proba(X_test)[:, 1]
+
+    accuracy = accuracy_score(y_test, y_pred)
+    auc = roc_auc_score(y_test, y_prob)
+    precision = precision_score(y_test, y_pred)
+    recall = recall_score(y_test, y_pred)
+    f1 = f1_score(y_test, y_pred)
+    mcc = matthews_corrcoef(y_test, y_pred)
+
+    results.append([
+        name,
+        accuracy,
+        auc,
+        precision,
+        recall,
+        f1,
+        mcc
+    ])
+
+# ==========================================
+# Step 6: Save Results to CSV
+# ==========================================
+
+# Create folder if not exists
+os.makedirs("model", exist_ok=True)
+
+results_df = pd.DataFrame(results, columns=[
+    "Model",
+    "Accuracy",
+    "AUC",
+    "Precision",
+    "Recall",
+    "F1 Score",
+    "MCC Score"
+])
+
+results_df.to_csv("model/model_results.csv", index=False)
+
+print("\nModel Evaluation Completed Successfully!")
+print(results_df)
