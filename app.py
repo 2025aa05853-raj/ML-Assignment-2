@@ -102,7 +102,35 @@ if uploaded_file is not None:
         st.text("Uploaded CSV has a 'target' column.")
         X_uploadedData = uploaded_data.drop("target", axis=1)
         y_uploadedData = uploaded_data["target"]
-        st.text("Uploaded File Path X_uploadedData: " + str(len(X_uploadedData)))
-        st.text("Uploaded File Path y_uploadedData: " + str(len(X_uploadedData)))
+        if model_choice in ["Logistic Regression", "KNN"]:
+            X_upload_scaled = scaler.transform(X_uploadedData)
+            y_pred_uploadedData = selected_model.predict(X_upload_scaled)
+            y_prob_uploadedData = selected_model.predict_proba(X_upload_scaled)[:, 1]
+        else:
+            y_pred_uploadedData = selected_model.predict(X_uploadedData)
+            y_prob_uploadedData = selected_model.predict_proba(X_uploadedData)[:, 1]
+
+        st.subheader("Evaluation Metrics (Uploaded Data)")
+
+        col1, col2, col3 = st.columns(3)
+
+        col1.metric("Accuracy", round(accuracy_score(y_uploadedData, y_pred_uploadedData), 4))
+        col2.metric("AUC", round(roc_auc_score(y_uploadedData, y_prob_uploadedData), 4))
+        col3.metric("Precision", round(precision_score(y_uploadedData, y_pred_uploadedData), 4))
+
+        col1.metric("Recall", round(recall_score(y_uploadedData, y_pred_uploadedData), 4))
+        col2.metric("F1 Score", round(f1_score(y_uploadedData, y_pred_uploadedData), 4))
+        col3.metric("MCC Score", round(matthews_corrcoef(y_uploadedData, y_pred_uploadedData), 4))
+
+        st.subheader("Confusion Matrix (Uploaded Data)")
+        st.dataframe(pd.DataFrame(confusion_matrix(y_uploadedData, y_pred_uploadedData)))
+
+        st.subheader("Classification Report (Uploaded Data)")
+        report_upload = classification_report(
+            y_uploadedData,
+            y_pred_uploadedData,
+            output_dict=True
+        )
+        st.dataframe(pd.DataFrame(report_upload).transpose().round(4))
 else:
     st.text("No data")
