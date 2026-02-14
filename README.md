@@ -75,12 +75,15 @@ model/model_results.csv
 
 **Model Performance Comparison**
 
-| **ML Model Name **            | Observation about Model Performance                                                                                              | ----------------------------- | -----------------------------------------------------------------------------------------------------------------------| |**Logistic Regression**        | Performs very well on this dataset due to good linear separability of features. Shows strong accuracy, precision, and AUC. It                                      provides a good balance between bias and variance.|
-| **Decision Tree**             | Achieves good accuracy but may slightly overfit the training data. Performance is reasonable, but less stable compared to                                           ensemble methods.|
-| **kNN**                       | Performance improves significantly after feature scaling. Sensitive to the choice of K and distance metric. Works well but                                         slightly slower for larger datasets.|
-| **Naive Bayes**               | Performs moderately well. Since it assumes feature independence, it may not fully capture complex relationships between                                             features, leading to slightly lower performance compared to other models.|
-| **Random Forest (Ensemble)**  | Shows strong and stable performance due to ensemble learning. Reduces overfitting by combining multiple decision trees. Provides                                   high accuracy and better generalization.|
-| **XGBoost (Ensemble)**        | Often achieves the best or near-best performance. Uses sequential boosting and regularization to reduce errors and overfitting.                                     Captures complex patterns effectively and provides high predictive power.|
+| ML Model Name | Observation about Model Performance |
+|---------------|-------------------------------------|
+| Logistic Regression | Performs very well on this dataset due to good linear separability of features. Shows strong accuracy, precision, and AUC. Provides a good balance between bias and variance. |
+| Decision Tree | Achieves good accuracy but may slightly overfit the training data. Performance is reasonable but less stable compared to ensemble methods. |
+| K-Nearest Neighbors (KNN) | Performance improves significantly after feature scaling. Sensitive to the choice of K and distance metric. Works well but may be slower for larger datasets. |
+| Naive Bayes | Performs moderately well. Since it assumes feature independence, it may not fully capture complex relationships between features, leading to slightly lower performance compared to other models. |
+| Random Forest (Ensemble) | Shows strong and stable performance due to ensemble learning. Reduces overfitting by combining multiple decision trees and provides high generalization ability. |
+| XGBoost (Ensemble) | Often achieves the best or near-best performance. Uses sequential boosting and regularization to reduce errors and overfitting. Captures complex patterns effectively and delivers high predictive power. |
+
 
 **Streamlit Application Features**
 
