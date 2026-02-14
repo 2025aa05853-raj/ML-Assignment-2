@@ -95,5 +95,10 @@ if uploaded_file is not None:
     st.markdown("---")
     st.header("Evaluation on Uploaded Dataset")
     st.text("Uploaded File Path : " + str(uploaded_file))
+    uploaded_data = pd.read_csv(uploaded_file)
+    if "target" not in uploaded_data.columns:
+        st.error("Uploaded CSV must contain a 'target' column.")
+    else:
+        st.text("Uploaded CSV has a 'target' column.")
 else:
     st.text("No data")
