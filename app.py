@@ -131,8 +131,6 @@ if uploaded_file is not None:
             output_dict=True
         )
         st.dataframe(pd.DataFrame(report_upload).transpose().round(4))
-else:
-    st.text("No data")
 
 # ==========================================
 # Evaluation Metrics (Model Dataset)
