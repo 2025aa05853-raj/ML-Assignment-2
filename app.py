@@ -134,3 +134,28 @@ if uploaded_file is not None:
         st.dataframe(pd.DataFrame(report_upload).transpose().round(4))
 else:
     st.text("No data")
+
+# ==========================================
+# Evaluation Metrics (Model Dataset)
+# ==========================================
+st.header("c) Evaluation Metrics (Test Dataset)")
+col1, col2, col3 = st.columns(3)
+
+col1.metric("Accuracy", round(accuracy_score(y_test, y_pred_test), 4))
+col2.metric("AUC", round(roc_auc_score(y_test, y_prob_test), 4))
+col3.metric("Precision", round(precision_score(y_test, y_pred_test), 4))
+
+col1.metric("Recall", round(recall_score(y_test, y_pred_test), 4))
+col2.metric("F1 Score", round(f1_score(y_test, y_pred_test), 4))
+col3.metric("MCC Score", round(matthews_corrcoef(y_test, y_pred_test), 4))
+
+# ==========================================
+# Confusion Matrix (Model Dataset)
+# ==========================================
+
+st.header("d) Confusion Matrix and Classification Report (Test Dataset)")
+
+st.subheader("Confusion Matrix")
+st.dataframe(pd.DataFrame(confusion_matrix(y_test, y_pred_test)))
+
+
