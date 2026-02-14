@@ -100,5 +100,9 @@ if uploaded_file is not None:
         st.error("Uploaded CSV must contain a 'target' column.")
     else:
         st.text("Uploaded CSV has a 'target' column.")
+        X_uploadedData = uploaded_data.drop("target", axis=1)
+        y_uploadedData = uploaded_data["target"]
+        st.text("Uploaded File Path X_uploadedData: " + str(len(X_uploadedData)))
+        st.text("Uploaded File Path y_uploadedData: " + str(len(X_uploadedData)))
 else:
     st.text("No data")
