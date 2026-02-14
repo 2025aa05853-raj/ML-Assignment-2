@@ -138,7 +138,7 @@ else:
 # ==========================================
 # Evaluation Metrics (Model Dataset)
 # ==========================================
-st.header("c) Evaluation Metrics (Test Dataset)")
+st.header("Evaluation Metrics (Test Dataset)")
 col1, col2, col3 = st.columns(3)
 
 col1.metric("Accuracy", round(accuracy_score(y_test, y_pred_test), 4))
@@ -153,9 +153,19 @@ col3.metric("MCC Score", round(matthews_corrcoef(y_test, y_pred_test), 4))
 # Confusion Matrix (Model Dataset)
 # ==========================================
 
-st.header("d) Confusion Matrix and Classification Report (Test Dataset)")
+st.header("Confusion Matrix and Classification Report (Test Dataset)")
 
 st.subheader("Confusion Matrix")
 st.dataframe(pd.DataFrame(confusion_matrix(y_test, y_pred_test)))
 
+# ==========================================
+# Classification Report (Model Dataset)
+# ==========================================
 
+st.subheader("Classification Report")
+report_test = classification_report(
+    y_test,
+    y_pred_test,
+    output_dict=True
+)
+st.dataframe(pd.DataFrame(report_test).transpose().round(4))
